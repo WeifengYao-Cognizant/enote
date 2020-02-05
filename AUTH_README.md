@@ -52,7 +52,7 @@
 #### 3.1 设计思路
 在*Spring Gateway*中定义*AuthFilter*，统一负责token的合法性及过期等验证工作。
 
-![enote-gateway](https://github.com/WeifengYao-Cognizant/enote/raw/master/enote_gateway.png "新单照会系统API网关")
+![enote-gateway](https://github.com/WeifengYao-Cognizant/enote/raw/master/enote-gateway.png "新单照会系统API网关")
 
 #### 3.2 请求响应前
 * **AuthFilter**对于每个`/api/<path>`请求在被真正接口**处理之前**，首先检查每个`/api/<path>`接口请求头中是否包含*Authorization*头，如果不包含则返回401未授权错误。
