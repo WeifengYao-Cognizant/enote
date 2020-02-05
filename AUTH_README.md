@@ -45,12 +45,12 @@
 - token传递：将新单系统用户的token放入请求（或响应）头*Authorization*中，跳转到相应的前端页面。此token是前端页面后续请求服务器端Restful接口的凭证。
 - token过期：每个token都会设置一个过期时间（如：30分钟），如果在这个时间内，前端页面没有任何请求导致token没有被刷新，token就会过期失效，后续如果前端页面再次使用此token访问，返回token过期错误。
 
-### 3. 接口鉴权认证
+### 3. 后端接口鉴权认证
 
 服务器后端通过**Spring Cloud Gateway**拦截前端所有请求路径基于`/api/<path>`的Restful接口请求，进行统一的认证鉴权。
 
 #### 3.1 设计思路
-在*Spring Gateway*中定义*AuthFilter*，统一负责token的合法性及过期等验证工作。
+在*Spring Cloud Gateway*中定义*AuthFilter*，统一负责token的合法性及过期等验证工作。
 
 ![enote-gateway](https://github.com/WeifengYao-Cognizant/enote/raw/master/enote-gateway.png "新单照会系统API网关")
 
@@ -66,7 +66,7 @@ token验证成功后，将请求委托给真正的处理接口，负责请求处
 当每个`/api/<path>`请求在被真正接口**处理之后**，*AuthFilter*还负责将token放在响应头*Authorization*中，返回给接口请求前端。这样即使token被刷新了，前端页面也能第一时间拿到最新token。token的刷新机制由服务器后端控制，前端页面不需要关心。
 
 
-### 4. 接口访问授权
+### 4. 后端接口访问授权
 新单照会系统接口访问权限是基于角色的访问控制(*RBAC*)进行设计的。后台接口只验证权限，不看角色。每个角色可以有多条权限，每个用户又可以拥有多个角色。角色的作用其实只是用来管理分配权限的，真正的验证只验证权限 ，体现在代码上就是接口上面的权限注解。
 
 #### 4.1 用户角色
@@ -89,9 +89,9 @@ token验证成功后，将请求委托给真正的处理接口，负责请求处
 - **Shiro**框架会根据当前访问用户的角色，授予他相应的权限，确保当前用户具备接口访问所需的权限，否则会抛出错误，拒绝该用户访问此接口。
 - 在开发层面，为了简化起见，对于所有角色都具有的权限（也就是登录用户都具有的权限），只做token验证，不做接口访问权限控制，体现在接口代码上面不加权限注解。
 
-### 5. 前端
+### 5. Web前端
 
-前端**Vue.js**项目结合**Vuex**、**LocalStorage**实现本地储存token，通过**VueRouter**统一控制所有受保护的路由请求，确保当前用户已授权。
+Web前端**Vue.js**项目结合**Vuex**、**LocalStorage**实现本地储存token，通过**VueRouter**统一控制所有受保护的路由请求，确保当前用户已授权。
 
 #### 5.1 token获取与存储
 - 首次访问前端页面，前端页面通过请求头Authorization拿到服务器端返回的token，存储在 localStorage 和 Vuex 里；
