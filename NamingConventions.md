@@ -17,7 +17,9 @@
 - 静态常量名：**All uppercase**, 如：**CACHE_PREFIX**
 - Yaml文件配置变量名：**Kebab case**, 如：**token-refresh-time**
 
-###3. JavaScript开发
+&nbsp;
+
+### 3. JavaScript开发
 
 - 项目文件夹命名使用`kebab-case`命名
 
@@ -48,7 +50,7 @@ props: {
 
 - 事件统一使用 `kebab-case` 格式，并且以动词结尾。
 
-
+&nbsp;
 
 ### 4. HTML/CSS开发
 TODO
