@@ -13,6 +13,7 @@
 
 ### 2. Java开发
 - 类名：**Pascal case**, 如：**HomeController**
+- 方法名：**Camel case**, 如：**searchUser**
 - 变量名：**Camel case**, 如：**agentCode**
 - 静态常量名：**All uppercase**, 如：**CACHE_PREFIX**
 - Yaml文件配置变量名：**Kebab case**, 如：**token-refresh-time**
